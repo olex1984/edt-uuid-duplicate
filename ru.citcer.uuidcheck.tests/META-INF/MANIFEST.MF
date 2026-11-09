@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UUID check tests
+Bundle-SymbolicName: ru.citcer.uuidcheck.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Oleg Zitzer
+Fragment-Host: ru.citcer.uuidcheck;bundle-version="[1.0.0,2.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: org.junit;bundle-version="4.13.0"

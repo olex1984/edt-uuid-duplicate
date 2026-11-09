@@ -1,0 +1,46 @@
+# ── PDE / JDT / Eclipse ───────────────────────────────
+bin/
+*.class
+.metadata/
+
+# ── корневой проект 1С:EDT (Citcer_Project) ───────────
+# только корень! .project модулей должны попасть в git
+/.project
+/.settings/
+/src/
+/DT-INF/
+
+# ── сборка ────────────────────────────────────────────
+build/
+target/
+*.jar
+
+# ── артефакты эталонного Python-скрипта ───────────────
+.uuid_manifest.json
+uuid_report.txt
+uuid_duplicates_posthandlings.csv
+
+# ── временное ─────────────────────────────────────────
+*.tmp
+*.log
+.~lock.*
+*.bak
+*~
+.#*
+
+# ── ОС / IDE ──────────────────────────────────────────
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+.idea/
+*.iml
+.vscode/
+hs_err_pid*.log
+replay_pid*.log
+
+# ── служебное ─────────────────────────────────────────
+/dropins/
+/plans/
+/*.docx
+find_uuid_duplicates.py

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+  <!-- Тип маркера -->
+  <extension id="duplicateUuidMarker" name="%marker.name"
+             point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <persistent value="false"/>
+    <attribute name="uuid"/>
+    <attribute name="elementType"/>
+    <attribute name="duplicateFiles"/>
+    <attribute name="kind"/>
+  </extension>
+
+  <!-- View -->
+  <extension point="org.eclipse.ui.views">
+    <category id="ru.citcer.uuidcheck.category" name="%category.name"/>
+    <view id="ru.citcer.uuidcheck.views.duplicates"
+          name="%view.name"
+          category="ru.citcer.uuidcheck.category"
+          class="ru.citcer.uuidcheck.ui.DuplicateUuidView"
+          icon="icons/duplicates.png"
+          restorable="true"/>
+  </extension>
+
+  <!-- Команды -->
+  <extension point="org.eclipse.ui.commands">
+    <command id="ru.citcer.uuidcheck.commands.checkProject"
+             name="%command.check.name"/>
+    <command id="ru.citcer.uuidcheck.commands.rescanAll"
+             name="%command.rescanAll.name"/>
+    <command id="ru.citcer.uuidcheck.commands.exportCsv"
+             name="%command.exportCsv.name"/>
+    <command id="ru.citcer.uuidcheck.commands.exportReport"
+             name="%command.exportReport.name"/>
+  </extension>
+
+  <!-- Обработчики -->
+  <extension point="org.eclipse.ui.handlers">
+    <handler commandId="ru.citcer.uuidcheck.commands.checkProject"
+             class="ru.citcer.uuidcheck.ui.CheckUuidCommandHandler"/>
+    <handler commandId="ru.citcer.uuidcheck.commands.rescanAll"
+             class="ru.citcer.uuidcheck.ui.RescanAllHandler"/>
+    <handler commandId="ru.citcer.uuidcheck.commands.exportCsv"
+             class="ru.citcer.uuidcheck.ui.ExportCsvHandler"/>
+    <handler commandId="ru.citcer.uuidcheck.commands.exportReport"
+             class="ru.citcer.uuidcheck.ui.ExportReportHandler"/>
+  </extension>
+
+  <!-- Меню: контекстное меню Project Explorer -->
+  <extension point="org.eclipse.ui.menus">
+    <menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+      <command commandId="ru.citcer.uuidcheck.commands.checkProject"
+               label="%menu.check.label">
+        <visibleWhen checkEnabled="false">
+          <with variable="selection">
+            <iterate ifEmpty="false">
+              <adapt type="org.eclipse.core.resources.IProject"/>
+            </iterate>
+          </with>
+        </visibleWhen>
+      </command>
+    </menuContribution>
+  </extension>
+
+  <!-- Настройки -->
+  <extension point="org.eclipse.ui.preferencePages">
+    <page id="ru.citcer.uuidcheck.preferences.page"
+          name="%prefs.page.name"
+          class="ru.citcer.uuidcheck.ui.UuidCheckPreferencePage"/>
+  </extension>
+  <extension point="org.eclipse.core.runtime.preferences">
+    <initializer class="ru.citcer.uuidcheck.PreferenceInitializer"/>
+  </extension>
+
+  <!-- Настройки уровня проекта -->
+  <extension point="org.eclipse.ui.propertyPages">
+    <page id="ru.citcer.uuidcheck.properties.page"
+          name="%property.page.name"
+          objectClass="org.eclipse.core.resources.IProject"
+          class="ru.citcer.uuidcheck.ui.UuidCheckPropertyPage"/>
+  </extension>
+
+  <!-- Прогрев при старте EDT -->
+  <extension point="org.eclipse.ui.startup">
+    <startup class="ru.citcer.uuidcheck.UuidEarlyStartup"/>
+  </extension>
+
+</plugin>

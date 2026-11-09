@@ -1,0 +1,19 @@
+# Единые переводы строк
+* text=auto eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Бинарные файлы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.zip binary
+*.docx binary
+
+# Фикстуры тестов — побайтово, без нормализации EOL
+# (bom.mdo — BOM, cp1251.mdo — CP1251, expected.csv — CRLF)
+ru.citcer.uuidcheck.tests/testdata/** -text
